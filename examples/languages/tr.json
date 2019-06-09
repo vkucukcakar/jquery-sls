@@ -1,0 +1,10 @@
+{
+		"jquery-sls is a jQuery language plugin":"jquery-sls bir jQuery dil eklentisidir",	
+		"This plugin supports dynamic language switching with multiple languages, dynamic language loading with json format and persistence.":"Bu eklenti dinamik biçimde dil değiştirmeyi, birden çok dili, dilleri json formatında dinamik olarak yüklemeyi ve kalıcı dil seçimini destekler.",	
+		"Select language:":"Dil Seçiniz:",
+		"link":"bağlantı",
+		"This is a <a href=\"#\" title=\"link\" alt=\"link\">link</a>":"Bu bir <a href=\"#\" title=\"bağlantı\" alt=\"bağlantı\">bağlantıdır</a>",
+		"Submit Button":"Gönder Butonu",
+		"This is a dynamic text":"Bu dinamik bir metin",
+		"<p lang=\"en\">This is a dynamic text</p>":"<p lang=\"tr\">Bu dinamik bir metin</p>"
+}

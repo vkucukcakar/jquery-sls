@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>jquery-sls example - Simple language switcher for jQuery</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <style>
+    body {
+      padding-top: 70px;
+    }
+    div.test > div{
+		margin: 20px;
+    }
+    div.test > .jumbotron{
+		margin: 0;
+		padding-top: 20px;
+		padding-bottom: 20px;
+    }
+	div.test {
+		padding-bottom:50px;
+	}	
+	#display{
+		color: #ff0000;
+	}
+	hr {
+		padding-bottom:20px;
+	}
+	select.form-control {
+		width: auto;
+	}
+  </style>
+  
+  <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+  <!-- Just updated jquery and bootstrap versions of the example. -->
+  <!-- The plugin currently in not compatible with jquery slim version ! -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  
+  <script src="../jquery-sls.js"></script>
+</head>
+<body lang="en">
+
+<nav class="navbar fixed-top navbar-light bg-light">
+  <div class="container">
+      <a class="navbar-brand" href="#">jquery-sls example - Simple language switcher for jQuery</a>
+  </div>
+</nav>
+
+
+<div class="container test">
+            <div class="jumbotron">
+                <p style="font-size:18px;" lang="en">jquery-sls is a jQuery language plugin</p>
+                <p style="font-size:16px;" lang="en">This plugin supports dynamic language switching with multiple languages, dynamic language loading with json format and persistence.</p>
+            </div>
+                      
+			<div>
+			<hr>
+				<p lang="en">This is a <a href="#" title="link" alt="link">link</a></p>
+				
+				<input class="btn btn-secondary" lang="en" type="submit" value="Submit Button" title="Submit Button">
+				
+				<div id="dynamic">Dynamic text will appear here in 3 seconds and will be static...</div>
+            </div>
+			
+			<div>
+			<p lang="en">Select language:</p>
+			<select id="lang-switcher" class="form-control" onchange="selectLanguage(this);">
+			  <option value="tr">tr</option>
+			  <option value="de">de</option>
+			  <option value="en">en</option>
+			</select>
+			</div>
+
+</div>
+
+<!-- Example dropselect javascript -->
+<script>    
+    $(document).ready(function () {
+		// Initialization
+		$.sls.init({
+			defaultLang: "en",
+			path: "languages/",
+			persistent: true,
+			clean: true,
+			attributes: ["title", "data-my-custom-attribute"],
+			observe: document
+		});
+
+		// Event hook example
+		$(document).on("jquery-sls-language-switched", function(event){
+			// Make select element reflect current language if language loaded from persistence
+			if ( $('#lang-switcher').val != $.sls.getLang() ) {
+				$('#lang-switcher').val($.sls.getLang());
+			}
+			console.log( "Language switched: " + event.message );			
+		});
+			
+		// Dynamic text example
+		setTimeout(function(){ 
+			//$('#dynamic').text('This is a dynamic text');
+			//$('#dynamic').html('This is a dynamic text');
+			//$('#dynamic').html('<p>This is a dynamic text</p>');
+			$('#dynamic').html('<p lang="en">This is a dynamic text</p>');
+		}, 3000);
+
+		// Manually set language
+		//$.sls.setLang("tr");	
+		
+	});
+	
+	function selectLanguage(select) {
+		$.sls.setLang(select.value);
+	}
+</script>
+
+</body>
+</html>
